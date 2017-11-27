@@ -30,10 +30,9 @@ class Country extends DbObject {
 			if (!empty($row)) {
 				$currentObject = new Country(
 					$row['cou_id'],
+          '',
           $row['cou_name']
 				);
-        // echo "Country::get() returns: ";
-        // print_r($currentObject);
 				return $currentObject;
 			}
 		}
@@ -69,64 +68,8 @@ class Country extends DbObject {
   }
   public static function deleteById($id) {
   }
+
+  public function getName () {
+    return $this->name;
+  }
 }
-
-
-// class Country extends DbObject {
-// 	/**
-// 	 * @param int $id
-// 	 * @return DbObject
-// 	 */
-// 	public static function get($id) {
-// 		// TODO: Implement get() method.
-// 	}
-//
-// 	/**
-// 	 * @return DbObject[]
-// 	 */
-// 	public static function getAll() {
-// 		// TODO: Implement getAll() method.
-// 	}
-//
-// 	/**
-// 	 * @return array
-// 	 */
-// 	public static function getAllForSelect() {
-// 		$returnList = array();
-//
-// 		$sql = '
-// 			SELECT cit_id, cit_name
-// 			FROM city
-// 			WHERE cit_id > 0
-// 			ORDER BY cit_name ASC
-// 		';
-// 		$stmt = Config::getInstance()->getPDO()->prepare($sql);
-// 		if ($stmt->execute() === false) {
-// 			print_r($stmt->errorInfo());
-// 		}
-// 		else {
-// 			$allDatas = $stmt->fetchAll(\PDO::FETCH_ASSOC);
-// 			foreach ($allDatas as $row) {
-// 				$returnList[$row['cit_id']] = $row['cit_name'];
-// 			}
-// 		}
-//
-// 		return $returnList;
-// 	}
-//
-// 	/**
-// 	 * @return bool
-// 	 */
-// 	public function saveDB() {
-// 		// TODO: Implement saveDB() method.
-// 	}
-//
-// 	/**
-// 	 * @param int $id
-// 	 * @return bool
-// 	 */
-// 	public static function deleteById($id) {
-// 		// TODO: Implement deleteById() method.
-// 	}
-//
-// }

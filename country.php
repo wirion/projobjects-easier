@@ -3,7 +3,7 @@
 // Autoload PSR-4
 spl_autoload_register();
 
-// Imports 
+// Imports
 use \Classes\Webforce3\Config\Config;
 use \Classes\Webforce3\DB\Country;
 use \Classes\Webforce3\Helpers\SelectHelper;
@@ -30,6 +30,10 @@ if (isset($_GET['delete']) && intval($_GET['delete']) > 0) {
 	}
 }
 
+
+
+
+
 // Formulaire soumis
 if(!empty($_POST)) {
 	$countryId = isset($_POST['id']) ? intval($_POST['id']) : 0;
@@ -38,14 +42,15 @@ if(!empty($_POST)) {
     if (empty($countryName)) {
 		$conf->addError('Veuillez renseigner le nom');
 	}
-    
+
     // je remplis l'objet qui est lu pour les inputs du formulaire, ou pour l'ajout en DB
 	$countryObject = new Country(
 		$countryId,
+		'',
 		$countryName
 	);
-    
-    // Si tout est ok => en DB
+
+  // Si tout est ok => en DB
 	if (!$conf->haveError()) {
 		if ($countryObject->saveDB()) {
 			header('Location: country.php?success='.urlencode('Ajout/Modification effectuée').'&cou_id='.$countryObject->getId());

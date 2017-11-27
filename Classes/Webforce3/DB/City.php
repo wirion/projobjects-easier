@@ -62,12 +62,11 @@ class City extends DbObject {
 		$stmt = Config::getInstance()->getPDO()->prepare($sql);
 		if ($stmt->execute() === false) {
 			print_r($stmt->errorInfo());
+			return null;
 		}
 		else {
-			$allDatas = $stmt->fetchAll();
-			// foreach ($allDatas as $row) {
-			// 	$returnList[$row['cit_id']] = $row['cit_name'];
-			// }
+			$fetchData = $stmt->fetchAll();
+			return $fetchData;
 		}
 	}
 
