@@ -20,7 +20,7 @@ class Config {
 	/** @var Config */
 	private static $_instance; // Design Pattern "Singleton"
 
-	public function __construct() {
+	private function __construct() {
 		$this->baseDir = dirname(dirname(dirname(dirname(__FILE__))));
 		$this->viewsDir = $this->baseDir.DIRECTORY_SEPARATOR.'views';
 		require $this->baseDir . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . 'config.php';

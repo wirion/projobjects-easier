@@ -3,7 +3,7 @@
 // Autoload PSR-4
 spl_autoload_register();
 
-// Imports 
+// Imports
 use \Classes\Webforce3\Config\Config;
 use \Classes\Webforce3\DB\City;
 use \Classes\Webforce3\DB\Country;
@@ -17,9 +17,15 @@ $cityObject = new City();
 
 // Récupère la liste complète des city en DB
 $citiesList = City::getAllForSelect();
+// echo "Cities object: ";
+// print_r($citiesList);
+// echo "Cities object: ";
 
 // Récupère la liste complète des country en DB
 $countriesList = Country::getAllForSelect();
+// echo "Coutrnies object: ";
+// print_r($countriesList);
+// echo "Coutrnies object: ";
 
 // Si modification d'une ville, on charge les données pour le formulaire
 if ($cityId > 0) {
@@ -37,7 +43,9 @@ if (isset($_GET['delete']) && intval($_GET['delete']) > 0) {
 // Formulaire soumis
 if(!empty($_POST)) {
 	$cityId = isset($_POST['id']) ? intval($_POST['id']) : 0;
+	print_r($cityId);
 	$countryId = isset($_POST['cou_id']) ? intval($_POST['cou_id']) : 0;
+	echo "Country id: "; print_r($countryId);
     $cityName = isset($_POST['cit_name']) ? trim($_POST['cit_name']) : '';
 
     if (!array_key_exists($countryId, $countriesList)) {
@@ -46,18 +54,19 @@ if(!empty($_POST)) {
     if (empty($cityName)) {
 		$conf->addError('Veuillez renseigner le nom');
 	}
-    
+
     // je remplis l'objet qui est lu pour les inputs du formulaire, ou pour l'ajout en DB
 	$cityObject = new City(
 		$cityId,
+		'',
 		new Country($countryId),
 		$cityName
 	);
-    
+
     // Si tout est ok => en DB
 	if (!$conf->haveError()) {
 		if ($cityObject->saveDB()) {
-			header('Location: city.php?success='.urlencode('Ajout/Modification effectuée').'&cit_id='.$cityObject->getId());
+			header('Location: city.php?success=' . urlencode('Ajout/Modification effectuée').'&cit_id='.$cityObject->getId());
 			exit;
 		}
 		else {
