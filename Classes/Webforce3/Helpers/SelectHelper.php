@@ -38,9 +38,9 @@ class SelectHelper {
 		$selectedValue = $this->selectedValue;
 		$attributesList = $this->attributesList;
 
-        ob_start();
-		include $config->getViewsDir().'select.php';
-        return ob_get_clean();
+    ob_start();
+		include $config->getViewsDir() . 'select.php';
+    return ob_get_clean();
 	}
 
 	public function displayHTML() {

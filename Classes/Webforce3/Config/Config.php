@@ -23,7 +23,7 @@ class Config {
 	public function __construct() {
 		$this->baseDir = dirname(dirname(dirname(dirname(__FILE__))));
 		$this->viewsDir = $this->baseDir.DIRECTORY_SEPARATOR.'views';
-		require $this->baseDir.DIRECTORY_SEPARATOR.'inc'.DIRECTORY_SEPARATOR.'config.php';
+		require $this->baseDir . DIRECTORY_SEPARATOR . 'inc' . DIRECTORY_SEPARATOR . 'config.php';
 
 		$dsn = 'mysql:dbname='.$dbDatabase.';host='.$dbHost.';charset=UTF8';
 		try {
@@ -42,11 +42,11 @@ class Config {
 			$this->addSuccess(trim($_GET['success']));
 		}
 	}
- 
+
  	// Design Pattern "Singleton"
 	public static function getInstance() {
 		if(is_null(self::$_instance)) {
-			self::$_instance = new Config();  
+			self::$_instance = new Config();
 		}
 		return self::$_instance;
 	}
